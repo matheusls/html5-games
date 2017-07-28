@@ -1,6 +1,14 @@
 var canvas;
 var canvasContext;
 
+const brickWidth = 80;
+const brickHeight = 20;
+const brickCols = 10;
+const brickRows = 17;
+const brickGap = 2;
+var brickGrid = new Array(brickCols * brickRows);
+var bricksLeft = 0;
+
 var ballRadius = 10;
 var ballX = 400;
 var ballY = 300;
@@ -16,6 +24,7 @@ var paddleY = 550;
 
 var winScore = 0;
 var playerScore = 0;
+var maxScore = 0;
 var attempts = 10;
 var gameOver = false;
 
@@ -107,25 +116,41 @@ const updateBall = () => {
   ballX += ballSpeedX;
   ballY += ballSpeedY;
 
+  let paddleTopEdgeY = canvas.height - 60;
+  let paddleBottomEdgeY = paddleTopEdgeY + paddleHeight;
+  let paddleLeftEdgeX = paddleX;
+  let paddleRightEdgeX = paddleLeftEdgeX + paddleWidth;
+
+  if (ballY <= 0) {
+    ballSpeedY = -ballSpeedY;
+  }
+  if (ballY > paddleTopEdgeY && // below the top of the paddle
+      ballY < paddleBottomEdgeY && // above the bottom of the paddle
+      ballX + 10 > paddleLeftEdgeX && // right of the left side of the paddle
+      ballX - 10 < paddleRightEdgeX) { // left of the right side of the paddle
+        ballSpeedY *= -1;
+
+        let paddleCenter = paddleX + paddleWidth / 2;
+        let ballDistFromPaddleCenter = ballX - paddleCenter;
+        ballSpeedX = ballDistFromPaddleCenter * 0.3;
+  }
+  if (ballY > paddleBottomEdgeY + 20) {
+    resetBall();
+  }
   if (ballX <= 0) {
     ballSpeedX = -ballSpeedX;
   }
   if (ballX >= canvas.width) {
     ballSpeedX = -ballSpeedX;
   }
-
-  if (ballY >= canvas.height) {
-    ballSpeedY = -ballSpeedY;
-  }
-  if (ballY <= 0) {
-    ballSpeedY = -ballSpeedY;
-  }
 }
 
+// resets the ball's positions
 const resetBall = () => {
   ballX = canvas.width / 2;
   ballY = canvas.height / 2;
-  ballSpeedX = -ballSpeedX;
+  ballSpeedX = 0;
+  ballSpeedY = 5;
 }
 
 // draws everything, except the canvas
@@ -135,11 +160,13 @@ const draw = () => {
     gameOverScreen();
     return;
   }
+  // draws the bricks
+  // drawBricks();
   // draws the ball
   drawBall('white', ballX, ballY, ballRadius);
   // draws the left paddle
   drawRect('white', paddleX, paddleY, paddleWidth, paddleHeight);
-  //draws the player's score
+  // draws the player's score
   drawText(30, 'white', playerScore, 25, 40);
 }
 
