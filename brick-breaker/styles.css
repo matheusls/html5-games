@@ -1,6 +1,6 @@
 body {
   background-color: #9a67ea;
-  font-family: 'VT323', monospace;
+  font-family: monospace;
   margin: auto;
   max-width: 800px;
   text-align: center;
@@ -15,8 +15,8 @@ button {
   border-radius: 5px;
   cursor: pointer;
   display: block;
-  font-family: 'VT323', monospace;
-  font-size: 1.6rem;
+  font-family: monospace;
+  font-size: 1.4rem;
   margin: 1rem auto;
   padding: 1rem;
   transition: all 0.3s ease-in-out;
@@ -29,6 +29,10 @@ button:focus {
   box-shadow: none;
   outline: none;
   transform: translate(5px, 5px);
+}
+
+button span {
+  vertical-align: middle;
 }
 
 @keyframes press {

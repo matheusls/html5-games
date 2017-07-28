@@ -11,7 +11,7 @@ var bricksLeft = 0;
 
 var ballRadius = 10;
 var ballX = 400;
-var ballY = 300;
+var ballY = 400;
 var ballSpeedX = 0;
 var ballSpeedY = 0;
 var prevBallSpeedX = 0;
@@ -59,13 +59,13 @@ const pauseGame = () => {
 const startGame = () => {
   if (!start) {
     if (gameOver) {
+      ballX = 400;
+      ballY = 400;
       playerScore = 0;
       gameOver = false;
     }
-    ballX = 405;
-    ballY = 305;
-    ballSpeedX = 10;
-    ballSpeedY = 10;
+    ballSpeedX = 0;
+    ballSpeedY = 5;
     start = true;
   }
   if (pause) {
@@ -97,7 +97,22 @@ const load = () => {
   });
 }
 
+const setBricks = () => {
+  for (var i = 0; i < 3 * brickCols; i++) {
+    brickGrid[i] = false;
+  }
+
+  for (; i < brickCols * brickRows; i++) {
+    if (Math.random() < 0.5) {
+      brickGrid[i] = true;
+    } else {
+      brickGrid[i] = false;
+    }
+  }
+}
+
 window.onload = () => {
+  setBricks();
   load();
   let startButton = document.querySelector("#start");
   let pauseButton = document.querySelector("#pause");
@@ -137,10 +152,10 @@ const updateBall = () => {
   if (ballY > paddleBottomEdgeY + 20) {
     resetBall();
   }
-  if (ballX <= 0) {
+  if (ballX - 10 <= 0) {
     ballSpeedX = -ballSpeedX;
   }
-  if (ballX >= canvas.width) {
+  if (ballX + 10 >= canvas.width) {
     ballSpeedX = -ballSpeedX;
   }
 }
@@ -161,13 +176,13 @@ const draw = () => {
     return;
   }
   // draws the bricks
-  // drawBricks();
+  drawBricks();
   // draws the ball
   drawBall('white', ballX, ballY, ballRadius);
   // draws the left paddle
   drawRect('white', paddleX, paddleY, paddleWidth, paddleHeight);
   // draws the player's score
-  drawText(30, 'white', playerScore, 25, 40);
+  drawText(25, 'white', playerScore, 25, 35);
 }
 
 // draws the canvas
@@ -182,6 +197,22 @@ const gameOverScreen = () => {
   if (playerScore >= winScore) {
     drawText(60, 'white', "YOU WIN", 100, 100);
     drawText(40, 'white', `Your score ${playerScore}`, 100, 170);
+  }
+}
+
+const rowColToArrayIndex = (row, col) => {
+  return col + row * brickCols;
+}
+
+const drawBricks = () => {
+  for (let i = 0; i < brickRows; i++) {
+    for (let j = 0; j < brickCols; j++) {
+      let arrayIndex = rowColToArrayIndex(i, j);
+
+      if (brickGrid[arrayIndex]) {
+        drawRect('#673AB7', brickWidth * j, brickHeight * i, brickWidth - brickGap, brickHeight - brickGap)
+      }
+    }
   }
 }
 
