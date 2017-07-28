@@ -1,0 +1,10 @@
+var canvas => handles the information about the dimensions of the actual canvas element (tag);
+
+var canvasContext => handles the graphics and drawing on the canvas;
+
+element.fillStyle = 'color'; // defines the element's color
+
+element.fillRect(x, y, w, h) => x = the element's top left corner initial position on the x axis
+//draws a rectangle             y = the element's top left corner initial position on the y axis
+//on the canvas                 w = the element's width
+                                h = the element's height

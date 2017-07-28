@@ -1,0 +1,64 @@
+body {
+  background-color: #9a67ea;
+  font-family: 'VT323', monospace;
+  margin: auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+button {
+  /*animation-name: press;
+  animation-duration: 0.7s;*/
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+  background-color: #673AB7;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  font-family: 'VT323', monospace;
+  font-size: 1.6rem;
+  margin: 1rem auto;
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+button:focus {
+  /*animation-name: press;
+  animation-duration: 0.7s;*/
+  background-color: #5a329f;
+  box-shadow: none;
+  outline: none;
+  transform: translate(5px, 5px);
+}
+
+@keyframes press {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    background-color: #5a329f;
+    transform: translate(5px, 5px);
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+    transform: translate(0px, 0px);
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+#start {
+  float: left;
+}
+
+#pause {
+  float: right;
+  margin-right: 5px;
+}
+
+#canvas {
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: block;
+  margin-bottom: 1rem;
+}
