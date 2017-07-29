@@ -15,7 +15,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   display: block;
-  font-family: 'VT323', monospace;
+  font-family: monospace;
   font-size: 1.6rem;
   margin: 1rem auto;
   padding: 1rem;
