@@ -225,7 +225,7 @@ const drawBall = (c, x, y, r) => {
 }
 
 const drawText = (s, c, t, x, y) => {
-  canvasContext.font = `${s}px VT323, monospace, sans-serif`;
+  canvasContext.font = `${s}px monospace, sans-serif`;
   canvasContext.fillStyle = c;
   canvasContext.fillText(t, x, y);
 }
