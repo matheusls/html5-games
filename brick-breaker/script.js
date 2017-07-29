@@ -22,10 +22,11 @@ const paddleHeight = 10;
 var paddleX = 350;
 var paddleY = 550;
 
+const attempts = 10;
+var playerAttempts = attempts;
 var winScore = 0;
 var playerScore = 0;
 var maxScore = 0;
-var attempts = 10;
 var gameOver = false;
 
 var start = false;
@@ -62,7 +63,9 @@ const startGame = () => {
       ballX = 400;
       ballY = 400;
       playerScore = 0;
+      playerAttempts = 10;
       gameOver = false;
+      setBricks();
     }
     ballSpeedX = 0;
     ballSpeedY = 5;
@@ -87,6 +90,7 @@ const load = () => {
     update();
     // clean the canvas
     drawCanvas();
+    checkGameOver();
     // draw all the elements in the new positions
     draw();
   }, 1000/framesPerSecond);
@@ -105,6 +109,7 @@ const setBricks = () => {
   for (; i < brickCols * brickRows; i++) {
     if (Math.random() < 0.5) {
       brickGrid[i] = true;
+      bricksLeft++;
     } else {
       brickGrid[i] = false;
     }
@@ -124,6 +129,10 @@ window.onload = () => {
 const update = () => {
   // updates the ball's position
   updateBall();
+
+  ballBrickCollision();
+
+  ballPaddleCollision();
 }
 
 // updates the ball's position
@@ -131,6 +140,56 @@ const updateBall = () => {
   ballX += ballSpeedX;
   ballY += ballSpeedY;
 
+  // ballBrickCollision();
+  //
+  // ballPaddleCollision();
+
+  if (ballX - 10 <= 0) {
+    ballSpeedX = -ballSpeedX;
+  }
+  if (ballX + 10 >= canvas.width) {
+    ballSpeedX = -ballSpeedX;
+  }
+}
+
+// resets the ball's positions
+const resetBall = () => {
+  playerAttempts--;
+  ballX = 400;
+  ballY = 400;
+  ballSpeedX = 0;
+  ballSpeedY = 5;
+}
+
+const ballBrickCollision = () => {
+  let ballBrickCol = Math.floor(ballX / brickWidth);
+  let ballBrickRow = Math.floor(ballY / brickHeight);
+  let brickUnderBall = rowColToArrayIndex(ballBrickRow, ballBrickCol);
+
+  if (brickUnderBall >= 0 && brickUnderBall < brickCols * brickRows) {
+    if (brickGrid[brickUnderBall]) {
+      let prevBallX = ballX - ballSpeedX;
+      let prevBallY = ballY - ballSpeedY;
+      let prevBrickCol = Math.floor(prevBallX / brickWidth);
+      let prevBrickRow = Math.floor(prevBallY / brickHeight);
+
+      if (prevBrickCol != ballBrickCol) {
+        ballSpeedX = -ballSpeedX;
+      }
+
+      if (prevBrickRow != ballBrickRow) {
+        ballSpeedY = -ballSpeedY;
+      }
+
+      brickGrid[brickUnderBall] = false;
+      bricksLeft--;
+      playerScore += 10;
+      // ballSpeedY = -ballSpeedY;
+    }
+  }
+}
+
+const ballPaddleCollision = () => {
   let paddleTopEdgeY = canvas.height - 60;
   let paddleBottomEdgeY = paddleTopEdgeY + paddleHeight;
   let paddleLeftEdgeX = paddleX;
@@ -152,20 +211,6 @@ const updateBall = () => {
   if (ballY > paddleBottomEdgeY + 20) {
     resetBall();
   }
-  if (ballX - 10 <= 0) {
-    ballSpeedX = -ballSpeedX;
-  }
-  if (ballX + 10 >= canvas.width) {
-    ballSpeedX = -ballSpeedX;
-  }
-}
-
-// resets the ball's positions
-const resetBall = () => {
-  ballX = canvas.width / 2;
-  ballY = canvas.height / 2;
-  ballSpeedX = 0;
-  ballSpeedY = 5;
 }
 
 // draws everything, except the canvas
@@ -182,7 +227,9 @@ const draw = () => {
   // draws the left paddle
   drawRect('white', paddleX, paddleY, paddleWidth, paddleHeight);
   // draws the player's score
-  drawText(25, 'white', playerScore, 25, 35);
+  drawText(20, 'white', `Score: ${playerScore}`, 25, 35);
+  // draws the remaining playerAttempts
+  drawText(20, 'white', `Attempts: ${playerAttempts}`, canvas.width-170, 35);
 }
 
 // draws the canvas
@@ -194,9 +241,12 @@ const drawCanvas = () => {
 const gameOverScreen = () => {
   ballSpeedX = 0;
   ballSpeedY = 0;
-  if (playerScore >= winScore) {
+  if (attempts >= 0) {
     drawText(60, 'white', "YOU WIN", 100, 100);
     drawText(40, 'white', `Your score ${playerScore}`, 100, 170);
+    if (playerAttempts == attempts) {
+      drawText(60, 'white', "PERFECT", 100, 270);
+    }
   }
 }
 
@@ -235,8 +285,10 @@ const drawText = (s, c, t, x, y) => {
 }
 
 const checkGameOver = () => {
-  if (playerScore >= winScore || attempts < 0) {
-    gameOver = true;
-    start = false;
+  if (start) {
+    if (bricksLeft <= 0 || playerAttempts < 0) {
+      gameOver = true;
+      start = false;
+    }
   }
 }
