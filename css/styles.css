@@ -1,0 +1,107 @@
+body {
+  background-color: #9a67ea;
+  font-family: monospace;
+  margin: 0;
+  max-width: 100%;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+main {
+  margin: auto auto 3rem;
+  max-width: 70%;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.4rem
+}
+
+p {
+  font-size: 1rem;
+}
+
+.games-list {
+  padding-left: 0;
+}
+
+.games-list li {
+  list-style: none;
+}
+
+.games-list a {
+  display: inline-block;
+}
+
+figure {
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  max-width: 70%;
+  transition: all 0.5s ease-in-out;
+  width: auto;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  width: auto;
+}
+
+ .games-list a:hover figure {
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+   max-width: 80%;
+ }
+
+footer {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  color: #fff;
+  flex-flow: row wrap;
+  font-size: 1.2rem;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.contacts-list {
+  display: inline-block;
+  font-size: 1.4rem;
+  padding: 0;
+}
+
+.contacts-list li {
+  display: inline-block;
+}
+
+.contacts-list li a {
+  display: inline-block;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  height: 1.5rem;
+  line-height: 1.2rem;
+  margin-left: 1rem;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  width: 1.5rem;
+}
+
+.contacts-list li a:hover {
+  background-color: #fff;
+  color: #9a67ea;
+}

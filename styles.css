@@ -1,0 +1,43 @@
+body {
+  background-color: #9a67ea;
+  font-family: monospace;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+main {
+  margin: auto;
+  max-width: 70%;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.4rem
+}
+
+p {
+  font-size: 1rem;
+}
+
+a {
+  display: inline-block;
+}
+
+figure {
+  border: 1px solid red !important;
+  max-width: 70% !important;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
