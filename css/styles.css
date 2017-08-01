@@ -5,6 +5,20 @@ body {
   max-width: 100%;
 }
 
+header {
+  position: relative;
+  max-width: 100%;
+  padding: 2.5rem;
+}
+
+#canvas {
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.5);
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
 h1, h2 {
   text-align: center;
 }
@@ -15,7 +29,9 @@ main {
 }
 
 h1 {
+  color: #fff;
   font-size: 3rem;
+  margin: 0;
 }
 
 h2 {
@@ -30,6 +46,10 @@ p {
   font-size: 1rem;
 }
 
+p:first-of-type {
+  margin-top: 4rem;
+}
+
 .games-list {
   padding-left: 0;
 }
@@ -40,6 +60,7 @@ p {
 
 .games-list a {
   display: inline-block;
+  color: #55218e;
 }
 
 figure {
@@ -73,25 +94,53 @@ footer {
   padding: 0 2rem;
 }
 
-footer a {
+footer {
   color: #fff;
-  text-decoration: none;
+}
+
+.signature a {
+  color: #cacaca;
+  transition: all 0.3s ease-in-out;
+}
+
+.signature a:hover {
+  color: #fff;
 }
 
 .contacts-list {
+  padding-left: 0;
+}
+
+.contacts-list li {
+  /*display: inline-block;*/
+  list-style: none;
+  text-align: left;
+}
+
+.contacts-list li:last-child {
+  margin-top: 0.5rem;
+}
+
+.contacts-list li a {
+  text-decoration: none;
+}
+
+.social-media-list {
   display: inline-block;
   font-size: 1.4rem;
   padding: 0;
 }
 
-.contacts-list li {
+.social-media-list li {
   display: inline-block;
 }
 
-.contacts-list li a {
-  display: inline-block;
+.social-media-list li a {
+  /*background-color: #9a67ea;*/
   border: 1px solid #fff;
   border-radius: 50%;
+  color: #fff;
+  display: inline-block;
   height: 1.5rem;
   line-height: 1.2rem;
   margin-left: 1rem;
@@ -101,7 +150,42 @@ footer a {
   width: 1.5rem;
 }
 
-.contacts-list li a:hover {
+.social-media-list li a:hover {
   background-color: #fff;
   color: #9a67ea;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1.5rem;
+  }
+
+  main {
+    margin: auto auto 3rem;
+    max-width: 90%;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.1rem
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .signature {
+    margin: 2rem 0 1rem;;
+  }
+
+  .signature a {
+    display: block;
+  }
 }

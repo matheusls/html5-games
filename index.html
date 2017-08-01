@@ -2,12 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Super HTML5 Games</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
     <header>
+      <canvas id="canvas" width="1300" height="150"></canvas>
       <h1>Super HTML5 Games</h1>
     </header>
 
@@ -17,7 +20,7 @@
       <h2>Why HTML5 Canvas and Javascript?</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-      <h2>Checkout some games!</h2>
+      <h2>Check some games out!</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <ul class="games-list">
         <li>
@@ -41,27 +44,86 @@
 
     <footer>
       <span class="signature">
-        Coded with <span class="fa fa-heart"></span> by <a href="#">Matheus Luiz da Silva</a>
+        Coded with <span class="fa fa-heart"></span> by <a href="https://github.com/matheusls">Matheus Luiz da Silva</a>
       </span>
-      <ul class="contacts-list">
+
+      <!-- <ul class="contacts-list">
         <li>
           <a href="#">
+            <span class="fa fa-envelope"></span> lsmatheus94@gmail.com
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="fa fa-whatsapp"></span> +55 15 997763551
+          </a>
+        </li>
+      </ul> -->
+
+      <ul class="social-media-list">
+        <li>
+          <a href="https://www.facebook.com/matheusluiz94" target="_blank">
             <span class="fa fa-facebook"></span>
           </a>
         </li>
 
         <li>
-          <a href="#">
+          <a href="https://github.com/matheusls" target="_blank">
             <span class="fa fa-github"></span>
           </a>
         </li>
 
         <li>
-          <a href="#">
+          <a href="https://codepen.io/matheusls94/" target="_blank">
             <span class="fa fa-codepen"></span>
           </a>
         </li>
       </ul>
     </footer>
+
+    <script type="text/javascript">
+      var canvas = document.querySelector("#canvas");
+      var context = canvas.getContext("2d");
+      var ballX = 10;
+      var ballY = 10;
+      var ballSpeedX = 7;
+      var ballSpeedY = 7;
+
+      if (window.innerWidth >= 1080) {
+        canvas.width = window.innerWidth - 17;
+      } else if (window.innerWidth < 1080 && window.innerWidth > 768) {
+        canvas.width = window.innerWidth - 10;
+      } else {
+        canvas.width = window.innerWidth;
+      }
+
+
+      setInterval(() => {
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+
+        if (ballX >= canvas.width) {
+          ballSpeedX *= -1;
+        }
+        if (ballX <= 0) {
+          ballSpeedX *= -1;
+        }
+        if (ballY >= canvas.height) {
+          ballSpeedY *= -1;
+        }
+        if (ballY <= 0) {
+          ballSpeedY *= -1;
+        }
+
+        context.fillStyle = '#320b86';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        context.fillStyle = 'white';
+        context.beginPath();
+        context.arc(ballX, ballY, 10, 0, Math.PI*2, true);
+        context.fill();
+      }, 1000/30);
+
+    </script>
   </body>
 </html>
