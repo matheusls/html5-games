@@ -1,0 +1,39 @@
+<!-- test-keyboard.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Second Test: Keyboard Events</title>
+    <link rel="icon" type="image/png" href="../../img/pixel-heart.png">
+    <script type="text/javascript" src="js/animation.js"></script>
+    <script type="text/javascript" src="js/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="400">
+      This browser does not support the HTML5 Canvas. Please update it.
+    </canvas>
+
+    <script type="text/javascript" src="js/keyboard.js"></script>
+    <script type="text/javascript" src="js/hero.js"></script>
+    <script type="text/javascript" src="js/ball.js"></script>
+    <script type="text/javascript" src="js/animation.js"></script>
+    <script type="text/javascript">
+      var canvas = document.querySelector("#canvas");
+      var context = canvas.getContext("2d");
+
+      var keyboard = new Keyboard(document);
+      var animation = new Animation(context);
+
+      var hero = new Hero(context, keyboard, animation);
+      hero.x = 0;
+      hero.y = 100;
+      animation.newSprite(hero);
+
+      keyboard.shot(SPACE, function () {
+        hero.shoot();
+      });
+
+      animation.start();
+    </script>
+  </body>
+</html>

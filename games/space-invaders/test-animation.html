@@ -1,0 +1,47 @@
+<!-- animation-test.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>First Test: Animation Loop with Sprites</title>
+    <link rel="icon" type="image/png" href="./img/pixel-heart.png">
+    <script type="text/javascript" src="js/animation.js"></script>
+    <script type="text/javascript" src="js/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      This browser does not support the HTML5 Canvas. Please update it.
+    </canvas>
+
+    <script type="text/javascript">
+      // getting the canvas
+      var canvas = document.querySelector("#canvas");
+      var context = canvas.getContext("2d");
+
+      // instantiating
+      var b1 = new Ball(context);
+      b1.x = 100;
+      b1.y = 200;
+      b1.speedX = 20;
+      b1.speedY = -10;
+      b1.color = 'red';
+      b1.radius = 20;
+
+      var b2 = new Ball(context);
+      b2.x = 100;
+      b2.y = 200;
+      b2.speedX = -10;
+      b2.speedY = 20;
+      b2.color = 'blue';
+      b2.radius = 30;
+
+      // creating the animation loop
+      var animation = new Animation(context);
+      animation.newSprite(b1);
+      animation.newSprite(b2);
+
+      // starting the animation
+      animation.start();
+    </script>
+  </body>
+</html>
